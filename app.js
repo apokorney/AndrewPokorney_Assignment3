@@ -6,37 +6,36 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var customers = require('./routes/customers');
+var restaurants = require('./routes/restaurants');
 
 var app = express();
 
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.get('/customers', customers.findAll);
-app.get('/customers/:id', customers.findById);
 
-// catch 404 and forward to error handler
+app.get('/restaurants', restaurants.findAll);
+app.get('/restaurants/:id', restaurants.findById);
+app.post('/restaurants', restaurants.addRestaurant);
+app.put('/restaurants/:id', restaurants.updateRestaurant);
+app.delete('/restaurants/:id', restaurants.deleteRestaurant);
+
+
+//404 exception
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
-// error handlers
 
-// development error handler
-// will print stacktrace
+// stacktrace exceptions
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
@@ -47,8 +46,8 @@ if (app.get('env') === 'development') {
   });
 }
 
-// production error handler
-// no stacktraces leaked to user
+
+// ensure the user doesn't get the stacktrace
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
@@ -57,5 +56,5 @@ app.use(function(err, req, res, next) {
   });
 });
 
-
+//back to app
 module.exports = app;

@@ -1,6 +1,6 @@
 {
-  "name": "untitled2",
-  "version": "0.0.0",
+  "name": "APassn3",
+  "version": "2.1.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
@@ -11,8 +11,8 @@
     "debug": "~2.2.0",
     "express": "~4.13.4",
     "jade": "~1.11.0",
+    "mongodb": "^2.2.11",
     "morgan": "~1.7.0",
-    "serve-favicon": "~2.3.0",
-    "mongodb": "1.4.9"
+    "serve-favicon": "~2.3.0"
   }
 }
