@@ -1,6 +1,4 @@
-/**
- * Created by bdalgaard on 10/19/2016.
- */
+
 var util = require('util');
 
 var Db = require('mongodb').Db,
